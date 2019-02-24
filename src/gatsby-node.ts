@@ -1,5 +1,4 @@
 import { createRemoteFileNode } from 'gatsby-source-filesystem';
-import opn from 'opn';
 
 import { PlaylistNode, TopArtistNode, TopTrackNode } from './nodes';
 import { getUserData, TimeRange } from './spotify-api';
