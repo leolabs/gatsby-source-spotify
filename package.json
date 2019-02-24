@@ -10,8 +10,7 @@
     "gatsby",
     "gatsby-plugin",
     "gatsby-source-plugin",
-    "trakt.tv",
-    "tmdb"
+    "spotify"
   ],
   "scripts": {
     "prepublishOnly": "yarn build",
