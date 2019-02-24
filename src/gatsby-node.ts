@@ -1,5 +1,6 @@
 import { createRemoteFileNode } from 'gatsby-source-filesystem';
 
+import { generateArtistString } from './artist-list';
 import { PlaylistNode, TopArtistNode, TopTrackNode } from './nodes';
 import { getUserData, TimeRange } from './spotify-api';
 
@@ -64,6 +65,7 @@ export const sourceNodes = async (
           ...track,
           id: `${track.time_range}__${track.id}`,
           order: index,
+          artistString: generateArtistString(track.artists),
           image:
             track.album && track.album.images && track.album.images.length
               ? await referenceRemoteFile(track.album.images[0].url, helpers)
