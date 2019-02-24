@@ -1,0 +1,18 @@
+language: node_js
+cache: yarn
+
+install:
+  - yarn
+
+script:
+  - yarn lint
+  - yarn build
+
+deploy:
+  provider: npm
+  email: '$DEPLOY_EMAIL'
+  api_key: '$DEPLOY_TOKEN'
+  skip_cleanup: true
+  on:
+    tags: true
+    branch: production

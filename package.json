@@ -1,0 +1,49 @@
+{
+  "name": "gatsby-source-spotify",
+  "version": "1.0.0",
+  "description": "Gatsby source plugin for using data from Spotify on your website",
+  "main": "index.js",
+  "bin": "token-tool.js",
+  "author": "Leo Bernard <admin@leolabs.org>",
+  "license": "MIT",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "gatsby-source-plugin",
+    "trakt.tv",
+    "tmdb"
+  ],
+  "scripts": {
+    "prepublishOnly": "yarn build",
+    "build": "tsc",
+    "format": "prettier --write 'src/**/*",
+    "lint": "tslint --project tsconfig.json"
+  },
+  "files": [
+    "*.js",
+    "*.d.ts"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "commander": "^2.19.0",
+    "gatsby-node-helpers": "^0.3.0",
+    "gatsby-source-filesystem": "^2.0.22",
+    "inquirer": "^6.2.2",
+    "node-fetch": "^2.3.0",
+    "opn": "^5.4.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "^0.0.43",
+    "@types/node": "^11.9.5",
+    "@types/node-fetch": "^2.1.6",
+    "@types/opn": "^5.1.0",
+    "@types/prettier": "^1.16.1",
+    "prettier": "^1.16.4",
+    "tslint": "^5.13.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.3.3333"
+  }
+}

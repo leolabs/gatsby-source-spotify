@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": true,
+    "esModuleInterop": true,
+    "outDir": "./"
+  },
+  "files": ["src/gatsby-node.ts", "src/index.ts", "src/token-tool.ts"]
+}
