@@ -6,11 +6,12 @@ export const generateArtistString = (artists: Artist[] | RecentArtist[]) => {
     return artists[0].name;
   }
 
-  return (
-    `${artists[0].name} feat. ` +
+  const additionalArtists =
     artists
-      .slice(1)
+      .slice(1, artists.length > 2 ? -1 : undefined)
       .map(a => a.name)
-      .join(', ')
-  );
+      .join(', ') +
+    (artists.length > 2 ? ` and ${artists[artists.length - 1].name}` : '');
+
+  return `${artists[0].name} feat. ${additionalArtists}`;
 };
