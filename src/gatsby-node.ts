@@ -1,10 +1,15 @@
 import { createRemoteFileNode } from 'gatsby-source-filesystem';
 
 import { generateArtistString } from './artist-list';
-import { PlaylistNode, TopArtistNode, TopTrackNode } from './nodes';
+import {
+  PlaylistNode,
+  RecentTrackNode,
+  TopArtistNode,
+  TopTrackNode,
+} from './nodes';
 import { getUserData, TimeRange } from './spotify-api';
 
-interface PluginOptions {
+export interface PluginOptions {
   // Auth
   clientId: string;
   clientSecret: string;
@@ -13,6 +18,7 @@ interface PluginOptions {
   // Config
   timeRanges?: TimeRange[];
   fetchPlaylists?: boolean;
+  fetchRecent?: boolean;
 }
 
 const referenceRemoteFile = async (
@@ -50,12 +56,8 @@ export const sourceNodes = async (
   const { createNode, touchNode } = actions;
   const helpers = { cache, createNode, createNodeId, store, touchNode };
 
-  const { tracks, artists, playlists } = await getUserData(
-    pluginOptions.clientId,
-    pluginOptions.clientSecret,
-    pluginOptions.refreshToken,
-    pluginOptions.timeRanges,
-    pluginOptions.fetchPlaylists,
+  const { tracks, artists, playlists, recentTracks } = await getUserData(
+    pluginOptions,
   );
 
   await Promise.all([
@@ -95,6 +97,27 @@ export const sourceNodes = async (
             playlist.images && playlist.images.length
               ? await referenceRemoteFile(playlist.images[0].url, helpers)
               : null,
+        }),
+      );
+    }),
+    ...recentTracks.map(async (track, index) => {
+      createNode(
+        RecentTrackNode({
+          ...track,
+          id: String(track.played_at),
+          order: index,
+          track: {
+            ...track.track,
+            image:
+              track.track.album &&
+              track.track.album.images &&
+              track.track.album.images.length
+                ? await referenceRemoteFile(
+                    track.track.album.images[0].url,
+                    helpers,
+                  )
+                : null,
+          },
         }),
       );
     }),

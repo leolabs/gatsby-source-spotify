@@ -1,6 +1,8 @@
 import fetch from 'node-fetch';
 
-import { Playlist, PlaylistsResponse } from './types/spotify-playlists';
+import { PluginOptions } from './gatsby-node';
+import { PlaylistsResponse } from './types/spotify-playlists';
+import { RecentResponse } from './types/spotify-recent';
 import { TokenResponse } from './types/spotify-token';
 import { Artist, TopArtistsResponse } from './types/spotify-top-artists';
 import { TopTracksResponse, Track } from './types/spotify-top-tracks';
@@ -33,7 +35,7 @@ export const REDIRECT_URL = 'http://localhost:5071/spotify';
 
 export const generateAuthUrl = (
   clientId: string,
-  scopes: Scope[] = ['user-top-read'],
+  scopes: Scope[] = ['user-top-read', 'user-read-recently-played'],
 ) => {
   const base = new URL(`${SPOTIFY_ACCOUNT_URL}/authorize`);
   base.searchParams.append('response_type', 'code');
@@ -115,13 +117,35 @@ export const getPlaylists = async (accessToken: string, limit: number = 50) => {
   return result.items;
 };
 
-export const getUserData = async (
-  clientId: string,
-  clientSecret: string,
-  refreshToken: string,
-  timeRanges: TimeRange[] = ['short_term', 'medium_term', 'long_term'],
-  fetchPlaylists: boolean = true,
+export const getRecentTracks = async (
+  accessToken: string,
+  limit: number = 50,
 ) => {
+  const url = new URL(`${SPOTIFY_API_URL}/me/player/recently-played`);
+  url.searchParams.append('limit', String(Math.min(limit, 50)));
+
+  const response = await fetch(String(url), {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(`${response.statusText}: ${await response.text()}`);
+  }
+
+  const result: RecentResponse = await response.json();
+  return result.items;
+};
+
+export const getUserData = async ({
+  clientId,
+  clientSecret,
+  refreshToken,
+  timeRanges = ['short_term', 'medium_term', 'long_term'],
+  fetchPlaylists = true,
+  fetchRecent = true,
+}: PluginOptions) => {
   const { access_token } = await getTokens(
     clientId,
     clientSecret,
@@ -130,6 +154,7 @@ export const getUserData = async (
   );
 
   const playlists = fetchPlaylists ? await getPlaylists(access_token) : [];
+  const recentTracks = fetchRecent ? await getRecentTracks(access_token) : [];
 
   const artists = await Promise.all(
     timeRanges.map(async t => {
@@ -147,6 +172,7 @@ export const getUserData = async (
 
   return {
     playlists,
+    recentTracks,
     artists: [].concat(...artists) as (Artist & { time_range: TimeRange })[],
     tracks: [].concat(...tracks) as (Track & { time_range: TimeRange })[],
   };
