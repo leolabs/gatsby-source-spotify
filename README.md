@@ -34,6 +34,7 @@ Put those credentials into your `gatsby-config.js` and you're good to go 🎉
     refreshToken: `<REFRESH_TOKEN>`,
 
     fetchPlaylists: true, // optional. Set to false to disable fetching of your playlists
+    fetchRecent: true, // optional. Set to false to disable fetching of your recently played tracks
     timeRanges: ['short_term', 'medium_term', 'long_term'], // optional. Set time ranges to be fetched
   },
 },
