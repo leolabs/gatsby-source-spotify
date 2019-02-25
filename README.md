@@ -14,6 +14,8 @@ To use this plugin, you have to provide a client id, a client secret,
 and a personal refresh token from Spotify. To do this, first
 [create a new Spotify App](https://developer.spotify.com/dashboard/applications).
 
+After you create it, click the "Edit Settings" button on the application dashboard and add `http://localhost:5071/spotify` to the "Redirect URIs" section and hit save.
+
 You can then run gatsby-source-spotify's integrated tool to log in using your
 Spotify account and to get your refresh token.
 
