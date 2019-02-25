@@ -108,6 +108,7 @@ export const sourceNodes = async (
           order: index,
           track: {
             ...track.track,
+            artistString: generateArtistString(track.track.artists),
             image:
               track.track.album &&
               track.track.album.images &&
