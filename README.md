@@ -1,5 +1,7 @@
 # gatsby-source-spotify
 
+[![npm](https://img.shields.io/npm/v/gatsby-source-spotify.svg)](https://www.npmjs.com/package/gatsby-source-spotify) [![Build Status](https://travis-ci.org/leolabs/gatsby-source-spotify.svg?branch=master)](https://travis-ci.org/leolabs/gatsby-source-spotify)
+
 This source plugin for Gatsby fetches personal statistics and playlists from
 [Spotify](https://spotify.com). You can use this to display a list of your
 favorite artists and tracks, or your public playlists.
