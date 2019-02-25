@@ -6,6 +6,11 @@
   "bin": "token-tool.js",
   "author": "Leo Bernard <admin@leolabs.org>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leolabs/gatsby-source-spotify.git"
+  },
+  "homepage": "https://github.com/leolabs/gatsby-source-spotify",
   "keywords": [
     "gatsby",
     "gatsby-plugin",
