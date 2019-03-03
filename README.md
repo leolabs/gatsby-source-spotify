@@ -68,9 +68,11 @@ Example for your top artists with images and genres:
         name
         genres
         image {
-          childImageSharp {
-            fluid(maxWidth: 400) {
-              ...GatsbyImageSharpFluid_withWebp
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 400) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
             }
           }
         }
