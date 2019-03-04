@@ -1,8 +1,7 @@
 {
-  "name": "gatsby-starter-semantic-ui",
-  "description": "Gatsby 2 Semantic UI Starter",
+  "name": "gatsby-source-spotify-semantic-ui",
+  "description": "Gatsby source spotify with Semantic UI Starter",
   "version": "1.0.0",
-  "author": "Richard Blechinger <me@blechi.at>",
   "dependencies": {
     "dotenv": "^6.2.0",
     "gatsby": "^2.1.19",
@@ -22,7 +21,7 @@
   "keywords": [
     "gatsby"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
@@ -31,13 +30,5 @@
   },
   "devDependencies": {
     "prettier": "^1.13.7"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pretzelhands/gatsby-starter-semantic-ui.git"
-  },
-  "bugs": {
-    "url": "https://github.com/pretzelhands/gatsby-starter-semantic-ui/issues"
-  },
-  "homepage": "https://github.com/pretzelhands/gatsby-starter-semantic-ui#readme"
+  }
 }
