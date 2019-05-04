@@ -13,19 +13,23 @@ cached locally to improve build times.
 ## Configuration
 
 To use this plugin, you have to provide a client id, a client secret,
-and a personal refresh token from Spotify. To do this, first
+and a personal refresh token from Spotify. 
+
+1. To do this, first
 [create a new Spotify App](https://developer.spotify.com/dashboard/applications).
 
-After you created it, click the "Edit Settings" button on the application dashboard, add `http://localhost:5071/spotify` to the "Redirect URIs" section and hit save.
+2. After you created it, click the "Edit Settings" button on the
+   application dashboard, add `http://localhost:5071/spotify` to
+   the "Redirect URIs" section and hit save.
 
-You can then run gatsby-source-spotify's integrated tool to log in using your
+3. You can then run gatsby-source-spotify's integrated tool to log in using your
 Spotify account and to get your refresh token.
 
 ```shell
 $ npx gatsby-source-spotify token <clientId> <clientToken>
 ```
 
-Put those credentials into your `gatsby-config.js` and you're good to go 🎉
+4. Put those credentials into your `gatsby-config.js` and you're good to go 🎉
 
 ```javascript
 {
