@@ -25,6 +25,9 @@ Spotify account and to get your refresh token.
 $ npx gatsby-source-spotify token <clientId> <clientToken>
 ```
 
+**"Illegal Scope" error**  
+If you get an "Illegal Scope" error from Spotify, you may need to delete your Spotify app and create a new one, see issue [#5](https://github.com/leolabs/gatsby-source-spotify/issues/5#issuecomment-503015275).
+
 Put those credentials into your `gatsby-config.js` and you're good to go 🎉
 
 ```javascript
