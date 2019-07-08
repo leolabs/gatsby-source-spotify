@@ -1,4 +1,5 @@
 import { createRemoteFileNode } from 'gatsby-source-filesystem';
+import fetch from 'node-fetch';
 
 import { generateArtistString } from './artist-list';
 import {
@@ -22,6 +23,7 @@ export interface PluginOptions {
 }
 
 const referenceRemoteFile = async (
+  id: string,
   url: string,
   { cache, createNode, createNodeId, touchNode, store },
 ) => {
@@ -32,11 +34,19 @@ const referenceRemoteFile = async (
     return { localFile___NODE: cachedResult };
   }
 
+  const testRes = await fetch(url);
+
+  if (!testRes.ok) {
+    console.warn(`[${id}] Image could not be loaded. Skipping...`);
+    return null;
+  }
+
   const fileNode = await createRemoteFileNode({
     url,
     store,
     cache,
     createNode,
+    reporter: {},
     createNodeId,
     ext: !url.includes('.') ? '.jpg' : undefined,
   });
@@ -70,7 +80,11 @@ export const sourceNodes = async (
           artistString: generateArtistString(track.artists),
           image:
             track.album && track.album.images && track.album.images.length
-              ? await referenceRemoteFile(track.album.images[0].url, helpers)
+              ? await referenceRemoteFile(
+                  track.album.uri,
+                  track.album.images[0].url,
+                  helpers,
+                )
               : null,
         }),
       );
@@ -83,7 +97,11 @@ export const sourceNodes = async (
           order: index,
           image:
             artist.images && artist.images.length
-              ? await referenceRemoteFile(artist.images[0].url, helpers)
+              ? await referenceRemoteFile(
+                  artist.uri,
+                  artist.images[0].url,
+                  helpers,
+                )
               : null,
         }),
       );
@@ -95,7 +113,11 @@ export const sourceNodes = async (
           order: index,
           image:
             playlist.images && playlist.images.length
-              ? await referenceRemoteFile(playlist.images[0].url, helpers)
+              ? await referenceRemoteFile(
+                  playlist.uri,
+                  playlist.images[0].url,
+                  helpers,
+                )
               : null,
         }),
       );
@@ -114,6 +136,7 @@ export const sourceNodes = async (
               track.track.album.images &&
               track.track.album.images.length
                 ? await referenceRemoteFile(
+                    track.track.uri,
                     track.track.album.images[0].url,
                     helpers,
                   )
