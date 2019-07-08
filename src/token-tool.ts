@@ -2,7 +2,7 @@
 
 import program from 'commander';
 import http from 'http';
-import opn from 'opn';
+import open from 'open';
 
 program.description('Spotify Refresh Token Tool');
 
@@ -47,7 +47,7 @@ program
       'Please log in using your Spotify credentials.',
     );
 
-    opn(generateAuthUrl(clientId));
+    open(generateAuthUrl(clientId));
   });
 
 program.parse(process.argv);
