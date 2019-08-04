@@ -41,20 +41,22 @@ const referenceRemoteFile = async (
     return null;
   }
 
-  const fileNode = await createRemoteFileNode({
-    url,
-    store,
-    cache,
-    createNode,
-    reporter: {},
-    createNodeId,
-    ext: !url.includes('.') ? '.jpg' : undefined,
-  });
+  try {
+    const fileNode = await createRemoteFileNode({
+      url,
+      store,
+      cache,
+      createNode,
+      reporter: {},
+      createNodeId,
+      ext: !url.includes('.') ? '.jpg' : undefined,
+    });
 
-  if (fileNode) {
-    cache.set(url, fileNode.id);
-    return { localFile___NODE: fileNode.id };
-  }
+    if (fileNode) {
+      cache.set(url, fileNode.id);
+      return { localFile___NODE: fileNode.id };
+    }
+  } catch (e) {}
 
   return null;
 };
