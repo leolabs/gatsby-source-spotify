@@ -1,7 +1,4 @@
-import {
-  createRemoteFileNode,
-  createFileNodeFromBuffer,
-} from 'gatsby-source-filesystem';
+import { createFileNodeFromBuffer } from 'gatsby-source-filesystem';
 import fetch from 'node-fetch';
 
 import { generateArtistString } from './artist-list';
