@@ -1,4 +1,7 @@
-import { createRemoteFileNode } from 'gatsby-source-filesystem';
+import {
+  createRemoteFileNode,
+  createFileNodeFromBuffer,
+} from 'gatsby-source-filesystem';
 import fetch from 'node-fetch';
 
 import { generateArtistString } from './artist-list';
@@ -41,14 +44,14 @@ const referenceRemoteFile = async (
     return null;
   }
 
-  const fileNode = await createRemoteFileNode({
-    url,
+  const fileNode = await createFileNodeFromBuffer({
+    buffer: await testRes.buffer(),
     store,
     cache,
     createNode,
-    reporter: {},
     createNodeId,
-    ext: !url.includes('.') ? '.jpg' : undefined,
+    name: id.replace(/[^a-z0-9]+/gi, '-'),
+    ext: '.jpg',
   });
 
   if (fileNode) {
