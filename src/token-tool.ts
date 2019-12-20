@@ -42,12 +42,17 @@ program
       })
       .listen(5071);
 
+    const authUrl = generateAuthUrl(clientId);
     console.log(
       'I will open a browser window for you.',
       'Please log in using your Spotify credentials.',
     );
+    console.log();
+    console.log("In case your browser doesn't open, here's the link:", authUrl);
 
-    open(generateAuthUrl(clientId));
+    try {
+      open(authUrl);
+    } catch (e) {}
   });
 
 program.parse(process.argv);
