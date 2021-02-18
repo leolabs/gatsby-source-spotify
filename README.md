@@ -10,6 +10,12 @@ gatsby-source-spotify is compatible with [gatsby-image](https://www.gatsbyjs.org
 Images are always accessible using the `image` key of a node. Downloaded images are
 cached locally to improve build times.
 
+## Install
+
+```shell
+$ npm install gatsby-source-spotify
+```
+
 ## Configuration
 
 To use this plugin, you have to provide a client id, a client secret,
