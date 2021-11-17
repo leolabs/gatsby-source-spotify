@@ -1,13 +1,8 @@
 import { createFileNodeFromBuffer } from 'gatsby-source-filesystem';
+import { createNodeHelpers } from 'gatsby-node-helpers';
 import fetch from 'node-fetch';
 
 import { generateArtistString } from './artist-list';
-import {
-  PlaylistNode,
-  RecentTrackNode,
-  TopArtistNode,
-  TopTrackNode,
-} from './nodes';
 import { getUserData, TimeRange } from './spotify-api';
 
 export interface PluginOptions {
@@ -60,9 +55,20 @@ const referenceRemoteFile = async (
 };
 
 export const sourceNodes = async (
-  { actions, createNodeId, store, cache },
+  { actions, createNodeId, store, cache, createContentDigest },
   pluginOptions: PluginOptions,
 ) => {
+  const { createNodeFactory } = createNodeHelpers({
+    typePrefix: 'Spotify',
+    createContentDigest,
+    createNodeId,
+  });
+
+  const TopArtistNode = createNodeFactory('TopArtist');
+  const TopTrackNode = createNodeFactory('TopTrack');
+  const PlaylistNode = createNodeFactory('Playlist');
+  const RecentTrackNode = createNodeFactory('RecentTrack');
+
   const { createNode, touchNode } = actions;
   const helpers = { cache, createNode, createNodeId, store, touchNode };
 
