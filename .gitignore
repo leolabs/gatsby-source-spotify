@@ -2,6 +2,7 @@
 /*.js
 /*.d.ts
 yarn-error.log
+build/
 node_modules/
 lib/
 service-account.json
