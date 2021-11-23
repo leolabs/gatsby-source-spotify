@@ -4,7 +4,7 @@
     "module": "commonjs",
     "declaration": true,
     "esModuleInterop": true,
-    "outDir": "./build"
+    "outDir": "./"
   },
   "files": [
     "src/gatsby-node.ts",
