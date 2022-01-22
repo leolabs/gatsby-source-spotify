@@ -36,7 +36,7 @@
     "gatsby-node-helpers": "^1.2.1",
     "gatsby-source-filesystem": "^4.0.0",
     "inquirer": "^6.5.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^3.1.1",
     "open": "^6.4.0"
   },
   "devDependencies": {
